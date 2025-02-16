@@ -24,6 +24,10 @@ jobs:
 
     - name: Set up Kubeconfig
       run: |
+<<<<<<< HEAD
+=======
+        mkdir -p $HOME/.kube
+>>>>>>> 6650946 (fixing deploy.yml)
         echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config
         chmod 600 $HOME/.kube/configl
 
