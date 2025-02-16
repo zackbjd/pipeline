@@ -22,6 +22,12 @@ jobs:
     - name: Push Image to GHCR
       run: docker push ghcr.io/zackbjd/pipeline:latest
 
-    - name: Apply Kubernetes Manifests
+    - name: Set up Kubeconfig
+      run: |
+        echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig.yaml
+        export KUBECONFIG=$(pwd)/kubeconfig.yaml
+
+    - name: Deploy to Kubernetes
       run: |
         kubectl apply -f kubernetes/
+#asd
