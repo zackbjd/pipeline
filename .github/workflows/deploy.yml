@@ -24,8 +24,8 @@ jobs:
 
     - name: Set up Kubeconfig
       run: |
-        echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig.yaml
-        export KUBECONFIG=$(pwd)/kubeconfig.yaml
+        echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config
+        chmod 600 $HOME/.kube/configl
 
     - name: Deploy to Kubernetes
       run: |
