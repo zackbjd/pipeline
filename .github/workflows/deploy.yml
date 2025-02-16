@@ -1,0 +1,27 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+
+    - name: Log in to GHCR
+      run: echo "${{ secrets.GH_TOKEN }}" | docker login ghcr.io -u zackbjd --password-stdin
+
+    - name: Build Docker Image
+      run: docker build -t ghcr.io/zackbjd/pipeline:latest .
+
+    - name: Push Image to GHCR
+      run: docker push ghcr.io/zackbjd/pipeline:latest
+
+    - name: Apply Kubernetes Manifests
+      run: |
+        kubectl apply -f kubernetes/

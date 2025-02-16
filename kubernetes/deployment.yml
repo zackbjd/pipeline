@@ -16,7 +16,9 @@ spec:
     spec:
       containers:
       - name: pipeline-app
-        image: laurapalmer/pipeline-app:latest
+        image: ghcr.io/zackbjd/pipeline:latest
         ports:
         - containerPort: 5000
         imagePullPolicy: IfNotPresent
+      imagePullSecrets:
+        - name: ghcr-secret
